@@ -1,6 +1,6 @@
 var myCharacter;
 var myFirstObstacle;
-
+var mySecondObstacle;
 
 var noObstacleLeft = true;
 var noObstacleRight = true;
@@ -8,8 +8,9 @@ var noObstacleTop = true;
 var noObstacleBottom = true;
 function startGame() {
     myGameArea.start();
-    myCharacter = new Player(10, 20, "green", 130, 300);
-    myFirstObstacle = new Obstacles(50,50, "brown", 135, 110);
+    myCharacter = new Player(10, 20, "deepskyblue", 130, 300);
+    myFirstObstacle = new Obstacles(50,50, "black", 135, 110);
+    mySecondObstacle = new Obstacles(120,58, "grey", 100, 200);
 }
 
 var myGameArea = {
@@ -36,13 +37,18 @@ var myGameArea = {
 
 function updateGameArea() {
     myGameArea.clear();
+
     noObstacleLeft = true;
     noObstacleRight = true;
     noObstacleTop = true;
     noObstacleBottom = true;
+
     myCharacter.speedX = 0;
     myCharacter.speedY = 0;
+
     myFirstObstacle.solid();
+    mySecondObstacle.solid();
+
     if (myGameArea.keys && myGameArea.keys[37] && noObstacleLeft) {
         myCharacter.speedX = -2;
     }
@@ -55,7 +61,10 @@ function updateGameArea() {
     if (myGameArea.keys && myGameArea.keys[40] && noObstacleBottom) {
         myCharacter.speedY = 2;
     }
+
     myCharacter.newPos();
+
     myFirstObstacle.update();
+    mySecondObstacle.update();
     myCharacter.update();
 }
