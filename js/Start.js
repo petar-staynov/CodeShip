@@ -2,6 +2,7 @@ var myCharacter;
 var myBackground;
 var myNewBullet;
 var myStartScreen;
+var myNewEnemy;
 
 var bullets = [];
 var fire_bullet = false;
@@ -15,6 +16,7 @@ function startGame() {
     myBackground = new Background(480,640,0,0);
     myCharacter = new Player(48, 48, 200, 580);
     myStartScreen = new StartScreen(200,100, 140, 300);
+    myNewEnemy = new Enemy(50,50, 130, -50);
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet){
@@ -94,6 +96,8 @@ function updateGameArea() {
             }
         }
 
+        myNewEnemy.moveDown();
+        myNewEnemy.update();
         myCharacter.update();
     }
 }
