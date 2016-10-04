@@ -49,16 +49,16 @@ function updateGameArea() {
 
 
     if (myGameArea.keys && myGameArea.keys[37] && noObstacleLeft) {
-        myCharacter.speedX = -2;
+        myCharacter.speedX = -4;
     }
     if (myGameArea.keys && myGameArea.keys[39] && noObstacleRight) {
-        myCharacter.speedX = 2;
+        myCharacter.speedX = 4;
     }
     if (myGameArea.keys && myGameArea.keys[38] && noObstacleTop) {
-        myCharacter.speedY = -2;
+        myCharacter.speedY = -4;
     }
     if (myGameArea.keys && myGameArea.keys[40] && noObstacleBottom) {
-        myCharacter.speedY = 2;
+        myCharacter.speedY = 4;
     }
 
     myCharacter.newPos();
