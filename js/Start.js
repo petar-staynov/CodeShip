@@ -121,5 +121,3 @@ function updateGameArea() {
         myCharacter.update();
     }
 }
-
-//TEST
