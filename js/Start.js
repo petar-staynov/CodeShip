@@ -12,8 +12,9 @@ var pressEnterOnce = true;
 var closedStartMenu = false;
 
 //AUDIO LOADER
-var soundBackground1 = new Audio("res/BackgroundShort.opus"); // buffers automatically when created
-var soundBackground2 = new Audio("res/BackgroundLong.opus"); // buffers automatically when created
+var soundBackground1 = new Audio("res/BackgroundShort.opus");
+var soundBackground2 = new Audio("res/BackgroundLong.opus");
+var bullet = new Audio("res/bullet.opus");
 
 function startGame() {
     myGameArea.start();
@@ -28,6 +29,9 @@ function startGame() {
             bullets.push(myNewBullet);
             pressedOnce = true;
             fire_bullet = false;
+
+            //BULLET AUDIO
+            bullet.play();
         }
     },390);
 }
@@ -56,7 +60,6 @@ var myGameArea = {
 function updateGameArea() {
     myGameArea.clear();
 
-    //
     if(closedStartMenu)
     {
         //STOPS MENU BACKGROUND MUSIC
