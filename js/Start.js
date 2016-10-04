@@ -11,6 +11,10 @@ var pressedOnce = true;
 var pressEnterOnce = true;
 var closedStartMenu = false;
 
+//AUDIO LOADER
+var soundBackground1 = new Audio("res/BackgroundShort.opus"); // buffers automatically when created
+var soundBackground2 = new Audio("res/BackgroundLong.opus"); // buffers automatically when created
+
 function startGame() {
     myGameArea.start();
     myBackground = new Background(480,640,0,0);
@@ -51,8 +55,26 @@ var myGameArea = {
 
 function updateGameArea() {
     myGameArea.clear();
-    if (closedStartMenu){
 
+    //
+    if(closedStartMenu)
+    {
+        //STOPS MENU BACKGROUND MUSIC
+        soundBackground1.loop = false;
+        soundBackground1.pause();
+
+        //STARTS GAME BACKGROUND MUSIC
+        soundBackground2.loop = true;
+        soundBackground2.play();
+    }
+    else {
+        //STARTS MENU BACKGROUND MUSIC
+        soundBackground1.loop = true;
+        soundBackground1.play(0);
+    }
+
+
+    if (closedStartMenu){
         myCharacter.speedX = 0;
         myCharacter.speedY = 0;
 
@@ -76,8 +98,6 @@ function updateGameArea() {
 
         myCharacter.newPos();
     }
-
-
     myBackground.scroll();
     myBackground.update();
     myStartScreen.onPressEnter();

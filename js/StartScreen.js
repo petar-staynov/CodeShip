@@ -13,8 +13,8 @@ function StartScreen(width, height, x, y) {
 
     this.onPressEnter = function () {
         if (myGameArea.keys && myGameArea.keys[13] && pressEnterOnce){
+            $("StartButton.png").fadeOut();
             closedStartMenu = true;
-            pressEnterOnce = false;
         }
     }
 }
