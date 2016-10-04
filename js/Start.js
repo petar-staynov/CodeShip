@@ -1,6 +1,7 @@
 var myCharacter;
 var myFirstObstacle;
 var mySecondObstacle;
+var myBackground;
 
 var noObstacleLeft = true;
 var noObstacleRight = true;
@@ -8,7 +9,8 @@ var noObstacleTop = true;
 var noObstacleBottom = true;
 function startGame() {
     myGameArea.start();
-    myCharacter = new Player(10, 20, "deepskyblue", 130, 300);
+    myBackground = new Background(480,640,0,0);
+    myCharacter = new Player(20, 40, "deepskyblue", 130, 300);
     myFirstObstacle = new Obstacles(50,50, "black", 135, 110);
     mySecondObstacle = new Obstacles(120,58, "grey", 100, 200);
 }
@@ -64,6 +66,7 @@ function updateGameArea() {
 
     myCharacter.newPos();
 
+    myBackground.update();
     myFirstObstacle.update();
     mySecondObstacle.update();
     myCharacter.update();

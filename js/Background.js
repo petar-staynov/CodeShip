@@ -1,4 +1,4 @@
-function Player(width, height, color, x, y) {
+function Background(width, height, x, y) {
     this.width = width;
     this.height = height;
     this.speedX = 0;
@@ -6,9 +6,9 @@ function Player(width, height, color, x, y) {
     this.x = x;
     this.y = y;
     this.img = new Image();
-    this.img.src = 'res/orange_ship.png';
+    this.img.src = 'res/background.png';
     this.img.onload = function () {
-      myGameArea.context.drawImage(img, x, y, width, height);
+        myGameArea.context.drawImage(img, x, y, width, height);
     };
     this.update = function() {
         var ctx = myGameArea.context;
