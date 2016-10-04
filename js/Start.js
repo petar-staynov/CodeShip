@@ -10,7 +10,7 @@ var noObstacleBottom = true;
 function startGame() {
     myGameArea.start();
     myBackground = new Background(480,640,0,0);
-    myCharacter = new Player(20, 40, "deepskyblue", 130, 300);
+    myCharacter = new Player(24, 64, 130, 300);
     myFirstObstacle = new Obstacles(50,50, "black", 135, 110);
     mySecondObstacle = new Obstacles(120,58, "grey", 100, 200);
 }
@@ -51,6 +51,7 @@ function updateGameArea() {
     myFirstObstacle.solid();
     mySecondObstacle.solid();
 
+
     if (myGameArea.keys && myGameArea.keys[37] && noObstacleLeft) {
         myCharacter.speedX = -2;
     }
@@ -65,6 +66,8 @@ function updateGameArea() {
     }
 
     myCharacter.newPos();
+    myBackground.moveUp();
+
 
     myBackground.update();
     myFirstObstacle.update();

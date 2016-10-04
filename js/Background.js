@@ -16,9 +16,10 @@ function Background(width, height, x, y) {
         //ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(this.img, this.x,this.y, this.width, this.height);
     };
-
-    this.newPos = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+    this.moveUp = function () {
+        this.y += 2;
+        if (this.y > 640){
+            this.y = -640;
+        }
     }
 }
