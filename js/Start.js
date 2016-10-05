@@ -17,12 +17,13 @@ var soundBackground2 = new Audio("res/BackgroundLong.opus");
 var bullet = new Audio("res/bullet.opus");
 
 
+var enemies = [];
+
 function startGame() {
     myGameArea.start();
     myBackground = new Background(480,640,0,0);
     myCharacter = new Player(48, 48, 200, 580);
     myStartScreen = new StartScreen(200,100, 140, 300);
-    myNewEnemy = new Enemy(130, -50, 50, 50, 20, 0.05, 1.5);
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet){
@@ -35,6 +36,15 @@ function startGame() {
             bullet.play();
         }
     },390);
+
+    var enemy_interval = setInterval(function () {
+        if (closedStartMenu){
+            myNewEnemy = new Enemy(myCharacter.x, -50, 50, 50, 20, 0.05, 1.5);
+            enemies.push(myNewEnemy);
+            //BULLET AUDIO
+            bullet.play();
+        }
+    },3420);
 }
 
 var myGameArea = {
@@ -119,10 +129,15 @@ function updateGameArea() {
                 }
             }
         }
-
+        if (enemies.length > 0){
+            for (var k = 0; k < enemies.length; k++){
+                enemies[k].moveDownSin();
+                enemies[k].update();
+            }
+        }
         //myNewEnemy.moveDown();
-        myNewEnemy.moveDownSin();
-        myNewEnemy.update();
+        //myNewEnemy.moveDownSin();
+        //myNewEnemy.update();
         myCharacter.update();
 
     }
