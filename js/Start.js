@@ -16,6 +16,37 @@ var soundBackground1 = new Audio("res/BackgroundShort.opus");
 var soundBackground2 = new Audio("res/BackgroundLong.opus");
 var bullet = new Audio("res/bullet.opus");
 
+
+
+// inital coordinates of the black square
+var sinX = 0;
+var sinY = 200;
+
+// let the square move "around" this y value
+var y_fix = sinY;
+// let the square this pixels up and down the fixed y value
+var range = 77;
+
+
+// we will calculate the sin-values from the angle variable
+// since the Math.sin function is working in radiants
+// we must increase the angle value in small steps -> anglespeed
+// the bigger the anglespeed value is, the wider the sine gets
+var angle = 0;
+var anglespeed = 0.05;
+
+// speed of the movement
+// initially 1, means it increases the x value
+// if you would set it to 0, the object would move up and down
+// at the same spot
+var speed = 1;
+
+// width and height of the square
+var sinWidth = 10;
+var sinHeight = 10;
+
+
+
 function startGame() {
     myGameArea.start();
     myBackground = new Background(480,640,0,0);
@@ -103,11 +134,11 @@ function updateGameArea() {
     }
     myBackground.scroll();
     myBackground.update();
-    myStartScreen.onPressEnter();
     if (!closedStartMenu){
+        myStartScreen.onPressEnter();
         myStartScreen.update();
-    }
 
+    }
     if (closedStartMenu){
         if (bullets.length > 0){
             for (var i = 0; i < bullets.length; i++){
@@ -122,5 +153,30 @@ function updateGameArea() {
         myNewEnemy.moveDown();
         myNewEnemy.update();
         myCharacter.update();
+        // clear
+        // comment this clear function to see the plot of the sine movement
+
+        sinX += speed;
+
+        // increase value for sin calculation
+        angle += anglespeed;
+
+        // always add to a fixed value
+        // multiply with range, sine only delivers values between -1 and 1
+        sinY = y_fix + Math.sin(angle) * range;
+
+        // if you would increase or decrease the range value,
+        // then the movement would "swing up" or "swing down"
+        // range += 0.10;
+
+        // if the square leaves the canvas on the right side,
+        // bring it back to the left side
+        if(sinX>500) {
+            sinX = 0;
+            // reset the range - if it has been manipulated
+            range = 20;
+        }
+
+        myGameArea.context.fillRect(sinX, sinY, sinWidth, sinHeight);
     }
 }
