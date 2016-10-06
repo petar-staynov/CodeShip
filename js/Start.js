@@ -124,6 +124,13 @@ function updateGameArea() {
             for (var i = 0; i < bullets.length; i++){
                 bullets[i].shootBullet();
                 bullets[i].update();
+                for (var j = 0; j < enemies.length; j++){
+                        if (bullets[i].x >= enemies[j].x && bullets[i].x <= enemies[j].x + enemies[j].width && bullets[i].y <= enemies[j].y + enemies[j].height/2 && bullets[i].y >= enemies[j].y && enemies[j].lives < 2){
+                            enemies.splice(j,1);
+                        }else{
+                            enemies[j].lives -= 2;
+                        }
+                }
                 if (bullets[i].y < -30){
                     bullets.splice(i, 1);
                 }

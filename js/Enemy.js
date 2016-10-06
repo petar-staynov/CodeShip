@@ -7,6 +7,7 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
     this.y = y;
     this.img = new Image();
     this.img.src = 'res/enemy.png';
+    this.lives = 10;
 // let the square move "around" this y value
     this.x_fix = this.x;
 // let the square this pixels up and down the fixed y value
@@ -58,6 +59,6 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
             //this.range = 20;
         }
 
-    }
+    };
 }
 
