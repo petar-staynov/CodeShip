@@ -12,9 +12,11 @@ var pressEnterOnce = true;
 var closedStartMenu = false;
 
 //AUDIO LOADER
-var soundBackground1 = new Audio("res/BackgroundShort.opus");
-var soundBackground2 = new Audio("res/BackgroundLong.opus");
-var bullet = new Audio("res/bullet.opus");
+var soundBackground1 = new Audio("res/BackgroundShort.opus"); //Main menu background
+var soundBackground2 = new Audio("res/BackgroundLong.opus"); //Main game background
+var bullet = new Audio("res/bullet.opus"); //Bullet shoot sound
+var spawn = new Audio("res/spawn.opus"); //Enemy spawn sound
+var kill = new Audio("res/kill.opus"); //Enemy kill sound
 
 
 var enemies = [];
@@ -32,7 +34,7 @@ function startGame() {
             pressedOnce = true;
             fire_bullet = false;
 
-            //BULLET AUDIO
+            //AUDIO
             bullet.play();
         }
     },390);
@@ -41,8 +43,9 @@ function startGame() {
         if (closedStartMenu){
             myNewEnemy = new Enemy(myCharacter.x, -50, 50, 50, 20, 0.05, 1.5);
             enemies.push(myNewEnemy);
-            //BULLET AUDIO
-            bullet.play();
+
+            //AUDIO
+            spawn.play();
         }
     },3420);
 }
@@ -126,7 +129,9 @@ function updateGameArea() {
                 bullets[i].update();
                 for (var j = 0; j < enemies.length; j++){
                         if (bullets[i].x >= enemies[j].x && bullets[i].x <= enemies[j].x + enemies[j].width && bullets[i].y <= enemies[j].y + enemies[j].height/2 && bullets[i].y >= enemies[j].y && enemies[j].lives < 2){
-                            enemies.splice(j,1);
+                            enemies.splice(j,1); //Removes enemy when bullet hits it
+                            bullets.splice(j, 1); //Removes bullet when it hits
+                            kill.play();
                         }else{
                             enemies[j].lives -= 2;
                         }
