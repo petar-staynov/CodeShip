@@ -16,7 +16,7 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
 // since the Math.sin function is working in radiants
 // we must increase the angle value in small steps -> anglespeed
 // the bigger the anglespeed value is, the wider the sine gets
-    this.angle = Math.random()*2*Math.PI;
+    this.angle = Math.random() * 2 * Math.PI;
     this.anglespeed = sinAngleSpeed;
 // speed of the movement
 // initially 1, means it increases the x value
@@ -24,9 +24,9 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
 // at the same spot
     this.speed = sinSpeed;
 
-    this.update = function() {
+    this.update = function () {
         var ctx = myGameArea.context;
-        ctx.drawImage(this.img, this.x,this.y, this.width, this.height);
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     };
 
     this.moveDown = function () {
@@ -51,14 +51,13 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
 
         // if the square leaves the canvas on the right side,
         // bring it back to the left side
-        if(this.y >640) {
+        if (this.y > 640) {
             this.y = -50;
-            this.x = 29 + Math.random()*myGameArea.canvas.width - 29;
+            this.x = 29 + Math.random() * myGameArea.canvas.width - 29;
             this.x_fix = this.x;
             // reset the range - if it has been manipulated
             //this.range = 20;
         }
-
     };
 }
 

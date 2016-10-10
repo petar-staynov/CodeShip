@@ -24,14 +24,14 @@ var enemies = [];
 
 function startGame() {
     myGameArea.start();
-    myBackground = new Background(480,640,0,0);
+    myBackground = new Background(480, 640, 0, 0);
     myCharacter = new Player(48, 48, 200, 580);
-    myStartScreen = new StartScreen(200,100, 140, 300);
-    myScore = new Score(10,20, "20px Georgia");
+    myStartScreen = new StartScreen(200, 100, 140, 300);
+    myScore = new Score(10, 20, "20px Georgia");
 
     var bullet_interval = setInterval(function () {
-        if (fire_bullet){
-            myNewBullet = new Bullets(10,20,myCharacter.x + myCharacter.width/2 - 5 ,myCharacter.y);
+        if (fire_bullet) {
+            myNewBullet = new Bullets(10, 20, myCharacter.x + myCharacter.width / 2 - 5, myCharacter.y, 0);
             bullets.push(myNewBullet);
             pressedOnce = true;
             fire_bullet = false;
@@ -39,22 +39,26 @@ function startGame() {
             //AUDIO
             bullet.play();
         }
-    },369);
+    }, 369);
 
     var enemy_interval = setInterval(function () {
-        if (closedStartMenu){
-            myNewEnemy = new Enemy(29 + Math.random()*myGameArea.canvas.width - 29, -50, 50, 50, 20, 0.05, 1.5);
+        if (closedStartMenu) {
+            myNewEnemy = new Enemy(29 + Math.random() * myGameArea.canvas.width - 29, -50, 50, 50, 20, 0.05, 1.5);
             enemies.push(myNewEnemy);
+            for (en of enemies) {
+                myNewBullet = new Bullets(10, 20, en.x + en.width / 2 - 5, en.y + en.height + 2, 2);
+                bullets.push(myNewBullet);
+            }
 
             //AUDIO
             spawn.play();
         }
-    },2200);
+    }, 2200);
 }
 
 var myGameArea = {
-    canvas : document.createElement("canvas"),
-    start : function() {
+    canvas: document.createElement("canvas"),
+    start: function () {
         this.canvas.width = 480;
         this.canvas.height = 640;
         this.context = this.canvas.getContext("2d");
@@ -68,7 +72,7 @@ var myGameArea = {
             myGameArea.keys[e.keyCode] = (e.type == "keydown");
         });
     },
-    clear : function(){
+    clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 };
@@ -76,8 +80,7 @@ var myGameArea = {
 function updateGameArea() {
     myGameArea.clear();
 
-    if(closedStartMenu)
-    {
+    if (closedStartMenu) {
         //STOPS MENU BACKGROUND MUSIC
         soundBackground1.loop = false;
         soundBackground1.pause();
@@ -93,7 +96,7 @@ function updateGameArea() {
     }
 
 
-    if (closedStartMenu){
+    if (closedStartMenu) {
         myCharacter.speedX = 0;
         myCharacter.speedY = 0;
 
@@ -110,7 +113,7 @@ function updateGameArea() {
         if (myGameArea.keys && myGameArea.keys[40]) {
             myCharacter.speedY = 4;
         }
-        if (myGameArea.keys && myGameArea.keys[32] && pressedOnce){
+        if (myGameArea.keys && myGameArea.keys[32] && pressedOnce) {
             fire_bullet = true;
             pressedOnce = false;
         }
@@ -119,41 +122,41 @@ function updateGameArea() {
     }
     myBackground.scroll();
     myBackground.update();
-    if (!closedStartMenu){
+    if (!closedStartMenu) {
         myStartScreen.onPressEnter();
         myStartScreen.update();
 
     }
-    if (closedStartMenu){
-        if (bullets.length > 0){
-            for (var i = 0; i < bullets.length; i++){
-                bullets[i].shootBullet();
+    if (closedStartMenu) {
+        if (bullets.length > 0) {
+            for (var i = 0; i < bullets.length; i++) {
+                bullets[i].moveBullet();
                 bullets[i].update();
-                for (var j = 0; j < enemies.length; j++){
-                        if (bullets[i].x >= enemies[j].x && bullets[i].x <= enemies[j].x + enemies[j].width && bullets[i].y <= enemies[j].y + enemies[j].height/2 && bullets[i].y >= enemies[j].y){
-                            enemies.splice(j,1); //Removes enemy when bullet hits it
-                            bullets.splice(i, 1);//Removes bullet when it hits
-                            myScore.addScore();
-                            if (i > 0){
-                                i--;
-                            }
-                            if (j > 0){
-                                j--;
-                            }
-                            kill.play();
+                for (var j = 0; j < enemies.length; j++) {
+                    if (bullets[i].checkColison(enemies[j])) {
+                        enemies.splice(j, 1); //Removes enemy when bullet hits it
+                        bullets.splice(i, 1);//Removes bullet when it hits
+                        myScore.addScore();
+                        if (i > 0) {
+                            i--;
                         }
+                        if (j > 0) {
+                            j--;
+                        }
+                        kill.play();
+                    }
                 }
-                if (bullets[i].y < -30){
+                if (bullets[i].y < -30) {
                     bullets.splice(i, 1);
-                    if (i > 0){
+                    if (i > 0) {
                         i--;
                     }
 
                 }
             }
         }
-        if (enemies.length > 0){
-            for (var k = 0; k < enemies.length; k++){
+        if (enemies.length > 0) {
+            for (var k = 0; k < enemies.length; k++) {
                 enemies[k].moveDownSin();
                 enemies[k].update();
             }
