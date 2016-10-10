@@ -53,7 +53,7 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
         // bring it back to the left side
         if(this.y >640) {
             this.y = -50;
-            this.x = 126 + Math.random()*myGameArea.canvas.width - 126;
+            this.x = 29 + Math.random()*myGameArea.canvas.width - 29;
             this.x_fix = this.x;
             // reset the range - if it has been manipulated
             //this.range = 20;

@@ -37,17 +37,17 @@ function startGame() {
             //AUDIO
             bullet.play();
         }
-    },390);
+    },369);
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu){
-            myNewEnemy = new Enemy(126 + Math.random()*myGameArea.canvas.width - 126, -50, 50, 50, 20, 0.05, 1.5);
+            myNewEnemy = new Enemy(29 + Math.random()*myGameArea.canvas.width - 29, -50, 50, 50, 20, 0.05, 1.5);
             enemies.push(myNewEnemy);
 
             //AUDIO
             spawn.play();
         }
-    },3420);
+    },2200);
 }
 
 var myGameArea = {
@@ -130,12 +130,22 @@ function updateGameArea() {
                 for (var j = 0; j < enemies.length; j++){
                         if (bullets[i].x >= enemies[j].x && bullets[i].x <= enemies[j].x + enemies[j].width && bullets[i].y <= enemies[j].y + enemies[j].height/2 && bullets[i].y >= enemies[j].y){
                             enemies.splice(j,1); //Removes enemy when bullet hits it
-                            bullets.splice(j, 1); //Removes bullet when it hits
+                            bullets.splice(i, 1);//Removes bullet when it hits
+                            if (i > 0){
+                                i--;
+                            }
+                            if (j > 0){
+                                j--;
+                            }
                             kill.play();
                         }
                 }
                 if (bullets[i].y < -30){
                     bullets.splice(i, 1);
+                    if (i > 0){
+                        i--;
+                    }
+
                 }
             }
         }
