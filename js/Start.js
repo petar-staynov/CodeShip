@@ -41,7 +41,7 @@ function startGame() {
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu){
-            myNewEnemy = new Enemy(myCharacter.x, -50, 50, 50, 20, 0.05, 1.5);
+            myNewEnemy = new Enemy(126 + Math.random()*myGameArea.canvas.width - 126, -50, 50, 50, 20, 0.05, 1.5);
             enemies.push(myNewEnemy);
 
             //AUDIO
@@ -128,12 +128,10 @@ function updateGameArea() {
                 bullets[i].shootBullet();
                 bullets[i].update();
                 for (var j = 0; j < enemies.length; j++){
-                        if (bullets[i].x >= enemies[j].x && bullets[i].x <= enemies[j].x + enemies[j].width && bullets[i].y <= enemies[j].y + enemies[j].height/2 && bullets[i].y >= enemies[j].y && enemies[j].lives < 2){
+                        if (bullets[i].x >= enemies[j].x && bullets[i].x <= enemies[j].x + enemies[j].width && bullets[i].y <= enemies[j].y + enemies[j].height/2 && bullets[i].y >= enemies[j].y){
                             enemies.splice(j,1); //Removes enemy when bullet hits it
                             bullets.splice(j, 1); //Removes bullet when it hits
                             kill.play();
-                        }else{
-                            enemies[j].lives -= 2;
                         }
                 }
                 if (bullets[i].y < -30){

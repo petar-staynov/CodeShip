@@ -16,7 +16,7 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
 // since the Math.sin function is working in radiants
 // we must increase the angle value in small steps -> anglespeed
 // the bigger the anglespeed value is, the wider the sine gets
-    this.angle = 0;
+    this.angle = Math.random()*2*Math.PI;
     this.anglespeed = sinAngleSpeed;
 // speed of the movement
 // initially 1, means it increases the x value
@@ -53,8 +53,8 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
         // bring it back to the left side
         if(this.y >640) {
             this.y = -50;
-            this.x = myCharacter.x;
-            this.x_fix = myCharacter.x;
+            this.x = 126 + Math.random()*myGameArea.canvas.width - 126;
+            this.x_fix = this.x;
             // reset the range - if it has been manipulated
             //this.range = 20;
         }
