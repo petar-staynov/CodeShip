@@ -3,6 +3,7 @@ var myBackground;
 var myNewBullet;
 var myStartScreen;
 var myNewEnemy;
+var myScore;
 
 var bullets = [];
 var fire_bullet = false;
@@ -26,6 +27,7 @@ function startGame() {
     myBackground = new Background(480,640,0,0);
     myCharacter = new Player(48, 48, 200, 580);
     myStartScreen = new StartScreen(200,100, 140, 300);
+    myScore = new Score(10,20, "20px Georgia");
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet){
@@ -131,6 +133,7 @@ function updateGameArea() {
                         if (bullets[i].x >= enemies[j].x && bullets[i].x <= enemies[j].x + enemies[j].width && bullets[i].y <= enemies[j].y + enemies[j].height/2 && bullets[i].y >= enemies[j].y){
                             enemies.splice(j,1); //Removes enemy when bullet hits it
                             bullets.splice(i, 1);//Removes bullet when it hits
+                            myScore.addScore();
                             if (i > 0){
                                 i--;
                             }
@@ -159,6 +162,7 @@ function updateGameArea() {
         //myNewEnemy.moveDownSin();
         //myNewEnemy.update();
         myCharacter.update();
+        myScore.update();
 
     }
 }
