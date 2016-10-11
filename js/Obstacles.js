@@ -6,7 +6,7 @@ function Obstacles(width, height, color, x, y) {
     this.x = x;
     this.y = y;
     this.update = function() {
-        var ctx = myGameArea.context;
+        let ctx = myGameArea.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };

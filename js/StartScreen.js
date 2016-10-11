@@ -6,8 +6,8 @@ function StartScreen(width, height, x, y) {
     this.img = new Image();
     this.img.src = 'res/StartButton.png';
 
-    var alpha = 1;
-    var ctx = myGameArea.context;
+    let alpha = 1;
+    let ctx = myGameArea.context;
     ctx.globalAlpha = 1;
 
     this.update = function() {
@@ -19,8 +19,8 @@ function StartScreen(width, height, x, y) {
 
 
             //contex FADE OUT EFFECT ON START
-            var counter = 0;
-            var fade = setInterval(function () {
+            let counter = 0;
+            let fade = setInterval(function () {
 
                 ctx.globalAlpha -= 0.020;
 

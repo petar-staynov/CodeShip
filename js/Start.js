@@ -1,29 +1,29 @@
-var myCharacter;
-var myBackground;
-var myNewBullet;
-var myStartScreen;
-var pause_game_state;
-var end_game_state = false;
-var myNewEnemy;
-var myScore;
+let myCharacter;
+let myBackground;
+let myNewBullet;
+let myStartScreen;
+let pause_game_state;
+let end_game_state = false;
+let myNewEnemy;
+let myScore;
 
 var bullets = [];
 var enemyBullets = [];
-var fire_bullet = false;
-var pressedOnce = true;
+let fire_bullet = false;
+let pressedOnce = true;
 
-var pressEnterOnce = true;
-var closedStartMenu = false;
+let pressEnterOnce = true;
+let closedStartMenu = false;
 
 //AUDIO LOADER
-var soundBackground1 = new Audio("res/BackgroundShort.opus"); //Main menu background
-var soundBackground2 = new Audio("res/BackgroundLong.opus"); //Main game background
-var bullet = new Audio("res/bullet.opus"); //Bullet shoot sound
-var spawn = new Audio("res/spawn.opus"); //Enemy spawn sound
-var kill = new Audio("res/kill.opus"); //Enemy kill sound
+let soundBackground1 = new Audio("res/BackgroundShort.opus"); //Main menu background
+let soundBackground2 = new Audio("res/BackgroundLong.opus"); //Main game background
+let bullet = new Audio("res/bullet.opus"); //Bullet shoot sound
+let spawn = new Audio("res/spawn.opus"); //Enemy spawn sound
+let kill = new Audio("res/kill.opus"); //Enemy kill sound
 
 
-var enemies = [];
+let enemies = [];
 
 function startGame() {
     myGameArea.start();
@@ -32,7 +32,7 @@ function startGame() {
     myStartScreen = new StartScreen(200, 100, 140, 300);
     myScore = new Score(10, 20, "20px Georgia");
 
-    var bullet_interval = setInterval(function () {
+    let bullet_interval = setInterval(function () {
         if (fire_bullet) {
             myNewBullet = new Bullets(10, 20, myCharacter.x + myCharacter.width / 2 - 5, myCharacter.y, 0);
             bullets.push(myNewBullet);
@@ -44,7 +44,7 @@ function startGame() {
         }
     }, 369);
 
-    var enemy_interval = setInterval(function () {
+    let enemy_interval = setInterval(function () {
         if (closedStartMenu) {
             myNewEnemy = new Enemy(29 + Math.random() * myGameArea.canvas.width - 29, -50, 50, 50, 20, 0.05, 1.5);
             enemies.push(myNewEnemy);
@@ -60,7 +60,7 @@ function startGame() {
     }, 50)
 }
 
-var myGameArea = {
+let myGameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
         this.canvas.width = 480;
@@ -176,7 +176,7 @@ function updateGameArea() {
             }
         }
         if (enemies.length > 0) {
-            for (var k = 0; k < enemies.length; k++) {
+            for (let k = 0; k < enemies.length; k++) {
                 enemies[k].moveDownSin();
                 enemies[k].update();
             }
