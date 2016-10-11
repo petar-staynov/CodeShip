@@ -9,7 +9,7 @@ function Player(width, height, x, y) {
     this.img = new Image();
     this.img.src = 'res/player.png';
     this.update = function () {
-        let ctx = myGameArea.context;
+        var ctx = myGameArea.context;
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     };
 

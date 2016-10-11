@@ -20,7 +20,7 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
     this.x_fix = this.x;
 // let the square this pixels up and down the fixed y value
     this.range = sinRange;
-// we will calculate the sin-values from the angle letiable
+// we will calculate the sin-values from the angle variable
 // since the Math.sin function is working in radiants
 // we must increase the angle value in small steps -> anglespeed
 // the bigger the anglespeed value is, the wider the sine gets
@@ -33,7 +33,7 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
     this.speed = sinSpeed;
 
     this.update = function () {
-        let ctx = myGameArea.context;
+        var ctx = myGameArea.context;
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     };
 

@@ -8,7 +8,7 @@ function Background(width, height, x, y) {
     this.img.src = 'res/background.png';
 
     this.update = function() {
-        let ctx = myGameArea.context;
+        var ctx = myGameArea.context;
         ctx.drawImage(this.img, this.x,this.y, this.width, this.height);
         ctx.drawImage(this.img, this.x,this.y2, this.width, this.height);
 
