@@ -51,18 +51,14 @@ function startGame() {
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu) {
-            myNewEnemy = new Enemy( Math.random() * (myGameArea.canvas.width-50) , -50, 50, 50, 20, 0.05, 1.5);
-            enemies.push(myNewEnemy);
-            //AUDIO
-            spawn.play();
+            for (let i = 0; i <= myScore.currScore / 2000; i++) {
+                enemies.push(new Enemy(Math.random() * (myGameArea.canvas.width - 50), -50, 50, 50, Math.random() * 100 + 20, Math.random() / 10+0.05, Math.random() * 5));
+                //AUDIO
+                spawn.play();
+            }
         }
     }, 2200);
 
-    let enemy_shot = setInterval(function () {
-        for (en of enemies) {
-            //en.shot();
-        }
-    }, 50)
 }
 
 var myGameArea = {
