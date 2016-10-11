@@ -48,7 +48,7 @@ function startGame() {
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu) {
-            myNewEnemy = new Enemy(29 + Math.random() * myGameArea.canvas.width - 29, -50, 50, 50, 20, 0.05, 1.5);
+            myNewEnemy = new Enemy( Math.random() * (myGameArea.canvas.width-50) , -50, 50, 50, 20, 0.05, 1.5);
             enemies.push(myNewEnemy);
             //AUDIO
             spawn.play();
@@ -57,7 +57,7 @@ function startGame() {
 
     let enemy_shot = setInterval(function () {
         for (en of enemies) {
-            en.shot();
+            //en.shot();
         }
     }, 50)
 }
@@ -145,6 +145,7 @@ function updateGameArea() {
                 for (let j = 0; j < enemies.length ; j++) {
                     if (bullets[i].checkCollision(enemies[j])) {
                         bullets.splice(i, 1);//Removes bullet when it hits
+                        enemies[j].stopAutomaticShoting();
                         enemies.splice(j, 1); //Removes enemy when bullet hits it
                         myScore.addScore();
                         kill.play();

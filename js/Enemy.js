@@ -1,4 +1,5 @@
 function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
+    var _thisEnemy = this;
     this.width = width;
     this.height = height;
     this.speedX = 0;
@@ -8,13 +9,15 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
     this.img = new Image();
     this.img.src = 'res/enemy.png';
     this.lives = 10;
-    this.randomTime = Math.random() * 30 ;
+    this.randomShotTime = Math.random() * 3000 + 100; //from 100 to 3500 ms
     this.shotCounter = this.randomTime;
     this.shot = function () {
-        if (this.shotCounter <= 0) {
-            enemyBullets.push(new Bullets(10, 20, this.x + this.width / 2 - 5, this.y + this.height + 2, 2));
-            this.shotCounter = this.randomTime
-        } else this.shotCounter--;
+        enemyBullets.push(new Bullets(10, 20, _thisEnemy.x + _thisEnemy.width / 2 - 5, _thisEnemy.y + _thisEnemy.height + 2, 2));
+    };
+
+    this.automaticShoting = setInterval(this.shot, this.randomShotTime);
+    this.stopAutomaticShoting = function () {
+        clearInterval(this.automaticShoting)
     };
 // let the square move "around" this y value
     this.x_fix = this.x;
