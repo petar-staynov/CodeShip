@@ -167,7 +167,8 @@ function updateGameArea() {
             for (let i = 0; i < enemyBullets.length; i++) {
                 enemyBullets[i].moveBullet();
                 enemyBullets[i].update();
-                if(enemyBullets[i].checkOutWindowRange()){
+                if (enemyBullets[i].checkOutWindowRange()) {
+                    enemyBullets.splice(i, 1);
                 }
                 if (enemyBullets[i].checkCollision(myCharacter)) {
 
