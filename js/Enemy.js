@@ -8,6 +8,14 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
     this.img = new Image();
     this.img.src = 'res/enemy.png';
     this.lives = 10;
+    this.randomTime = Math.random() * 30 ;
+    this.shotCounter = this.randomTime;
+    this.shot = function () {
+        if (this.shotCounter <= 0) {
+            bullets.push(new Bullets(10, 20, this.x + this.width / 2 - 5, this.y + this.height + 2, 2));
+            this.shotCounter = this.randomTime
+        } else this.shotCounter--;
+    };
 // let the square move "around" this y value
     this.x_fix = this.x;
 // let the square this pixels up and down the fixed y value

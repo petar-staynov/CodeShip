@@ -6,6 +6,7 @@ var myNewEnemy;
 var myScore;
 
 var bullets = [];
+var enemyBullets = [];
 var fire_bullet = false;
 var pressedOnce = true;
 
@@ -45,15 +46,16 @@ function startGame() {
         if (closedStartMenu) {
             myNewEnemy = new Enemy(29 + Math.random() * myGameArea.canvas.width - 29, -50, 50, 50, 20, 0.05, 1.5);
             enemies.push(myNewEnemy);
-            for (en of enemies) {
-                myNewBullet = new Bullets(10, 20, en.x + en.width / 2 - 5, en.y + en.height + 2, 2);
-                bullets.push(myNewBullet);
-            }
-
             //AUDIO
             spawn.play();
         }
     }, 2200);
+
+    let enemy_shot = setInterval(function () {
+        for (en of enemies) {
+            en.shot();
+        }
+    }, 50)
 }
 
 var myGameArea = {
@@ -129,10 +131,10 @@ function updateGameArea() {
     }
     if (closedStartMenu) {
         if (bullets.length > 0) {
-            for (var i = 0; i < bullets.length; i++) {
+            for (let i = 0; i < bullets.length; i++) {
                 bullets[i].moveBullet();
                 bullets[i].update();
-                for (var j = 0; j < enemies.length; j++) {
+                for (let j = 0; j < enemies.length; j++) {
                     if (bullets[i].checkColison(enemies[j])) {
                         enemies.splice(j, 1); //Removes enemy when bullet hits it
                         bullets.splice(i, 1);//Removes bullet when it hits
