@@ -8,12 +8,15 @@ var myNewEnemy;
 var myScore;
 var myLives;
 
+
+var currAlphaStart = 1;
+
 var bullets = [];
 var enemyBullets = [];
 var fire_bullet = false;
 var pressedOnce = true;
 
-var pressEnterOnce = true;
+var pressEnterOnce = false;
 var closedStartMenu = false;
 
 //AUDIO LOADER
@@ -130,7 +133,18 @@ function updateGameArea() {
     myBackground.update();
     if (!closedStartMenu) {
         myStartScreen.onPressEnter();
+        if (pressEnterOnce){
+            if (currAlphaStart <= 0.04){
+                closedStartMenu = true;
+                pressEnterOnce = false;
+            }else{
+                myGameArea.context.globalAlpha -= 0.02;
+                currAlphaStart -= 0.02;
+            }
+            myGameArea.context.globalAlpha = currAlphaStart;
+        }
         myStartScreen.update();
+        myGameArea.context.globalAlpha = 1;
 
     }
     if (closedStartMenu) {

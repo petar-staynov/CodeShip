@@ -15,23 +15,8 @@ function StartScreen(width, height, x, y) {
     };
 
     this.onPressEnter = function () {
-        if (myGameArea.keys && myGameArea.keys[13] && pressEnterOnce){
-
-
-            //contex FADE OUT EFFECT ON START
-            var counter = 0;
-            var fade = setInterval(function () {
-
-                ctx.globalAlpha -= 0.020;
-
-                counter++;
-
-                if(counter == 16) {
-                    closedStartMenu = true;
-                    ctx.globalAlpha = 1;
-                    clearInterval(fade);
-                }
-            }, 100);
+        if (myGameArea.keys && myGameArea.keys[13]){
+            pressEnterOnce = true;
         }
     }
 }
