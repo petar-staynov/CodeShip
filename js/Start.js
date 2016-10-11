@@ -172,7 +172,7 @@ function updateGameArea() {
                 if (enemyBullets[i].checkCollision(myCharacter)) {
 
                     myCharacter.hit();
-
+                    enemyBullets.splice(i, 1);
                     if(myCharacter.lives==0){
                         end_game_state=true;
                     }
