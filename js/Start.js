@@ -6,6 +6,7 @@ var pause_game_state;
 var end_game_state = false;
 var myNewEnemy;
 var myScore;
+var myLives;
 
 var bullets = [];
 var enemyBullets = [];
@@ -30,7 +31,8 @@ function startGame() {
     myBackground = new Background(480, 640, 0, 0);
     myCharacter = new Player(48, 48, 200, 580);
     myStartScreen = new StartScreen(200, 100, 140, 300);
-    myScore = new Score(10, 20, "20px Georgia");
+    myScore = new Score(10, 20, "20px Myriad");
+    myLives = new Life(400, 20, "20px Myriad");
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet) {
@@ -162,13 +164,15 @@ function updateGameArea() {
             }
         }
         if (enemyBullets.length > 0) {
-            for (let ind in enemyBullets) {
-                enemyBullets[ind].moveBullet();
-                enemyBullets[ind].update();
-                if(enemyBullets[ind].checkOutWindowRange()){
+            for (let i = 0; i < enemyBullets.length; i++) {
+                enemyBullets[i].moveBullet();
+                enemyBullets[i].update();
+                if(enemyBullets[i].checkOutWindowRange()){
                 }
-                if (enemyBullets[ind].checkCollision(myCharacter)) {
-                    myCharacter.die();
+                if (enemyBullets[i].checkCollision(myCharacter)) {
+
+                    myCharacter.hit();
+
                     if(myCharacter.lives==0){
                         end_game_state=true;
                     }
@@ -186,6 +190,7 @@ function updateGameArea() {
         //myNewEnemy.update();
         myCharacter.update();
         myScore.update();
+        myLives.update();
 
     }
     if (end_game_state) {

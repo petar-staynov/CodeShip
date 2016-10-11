@@ -34,8 +34,8 @@ function Player(width, height, x, y) {
             this.y = 0;
         }
     };
-    this.die = function () {
-        this.lives--;
-        myScore.currScore -= 33;
+    this.hit = function () {
+        myLives.currLives--;
+        // myScore.currScore -= 33;
     }
 }
