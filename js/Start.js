@@ -138,28 +138,18 @@ function updateGameArea() {
             for (let i = 0; i < bullets.length; i++) {
                 bullets[i].moveBullet();
                 bullets[i].update();
-                for (let j = 0; j < enemies.length; j++) {
-                    if (bullets[i].checkCollision(enemies[j])) {
-
-                        enemies.splice(j, 1); //Removes enemy when bullet hits it
-                        bullets.splice(i, 1);//Removes bullet when it hits
-                        myScore.addScore();
-                        if (i > 0) {
-                            i--;
-                        }
-                        if (j > 0) {
-                            j--;
-                        }
-                        kill.play();
-                    }
-                }
-
                 if (bullets[i].checkOutWindowRange()) {
                     bullets.splice(i, 1);
-                    if (i > 0) {
-                        i--;
+                    break;
+                }
+                for (let j = 0; j < enemies.length ; j++) {
+                    if (bullets[i].checkCollision(enemies[j])) {
+                        bullets.splice(i, 1);//Removes bullet when it hits
+                        enemies.splice(j, 1); //Removes enemy when bullet hits it
+                        myScore.addScore();
+                        kill.play();
+                        break;
                     }
-
                 }
             }
         }
@@ -169,11 +159,12 @@ function updateGameArea() {
                 enemyBullets[i].update();
                 if (enemyBullets[i].checkOutWindowRange()) {
                     enemyBullets.splice(i, 1);
+                    break;
                 }
                 if (enemyBullets[i].checkCollision(myCharacter)) {
-
                     myCharacter.hit();
                     enemyBullets.splice(i, 1);
+                    break;
                     if(myCharacter.lives==0){
                         end_game_state=true;
                     }
