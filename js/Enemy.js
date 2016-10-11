@@ -12,7 +12,7 @@ function Enemy(x, y, width, height, sinRange, sinAngleSpeed, sinSpeed) {
     this.shotCounter = this.randomTime;
     this.shot = function () {
         if (this.shotCounter <= 0) {
-            bullets.push(new Bullets(10, 20, this.x + this.width / 2 - 5, this.y + this.height + 2, 2));
+            enemyBullets.push(new Bullets(10, 20, this.x + this.width / 2 - 5, this.y + this.height + 2, 2));
             this.shotCounter = this.randomTime
         } else this.shotCounter--;
     };

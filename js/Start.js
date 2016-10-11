@@ -2,6 +2,8 @@ var myCharacter;
 var myBackground;
 var myNewBullet;
 var myStartScreen;
+var pause_game_state;
+var end_game_state = false;
 var myNewEnemy;
 var myScore;
 
@@ -135,7 +137,8 @@ function updateGameArea() {
                 bullets[i].moveBullet();
                 bullets[i].update();
                 for (let j = 0; j < enemies.length; j++) {
-                    if (bullets[i].checkColison(enemies[j])) {
+                    if (bullets[i].checkCollision(enemies[j])) {
+
                         enemies.splice(j, 1); //Removes enemy when bullet hits it
                         bullets.splice(i, 1);//Removes bullet when it hits
                         myScore.addScore();
@@ -148,12 +151,27 @@ function updateGameArea() {
                         kill.play();
                     }
                 }
-                if (bullets[i].y < -30) {
+
+                if (bullets[i].checkOutWindowRange()) {
                     bullets.splice(i, 1);
                     if (i > 0) {
                         i--;
                     }
 
+                }
+            }
+        }
+        if (enemyBullets.length > 0) {
+            for (let ind in enemyBullets) {
+                enemyBullets[ind].moveBullet();
+                enemyBullets[ind].update();
+                if(enemyBullets[ind].checkOutWindowRange()){
+                }
+                if (enemyBullets[ind].checkCollision(myCharacter)) {
+                    myCharacter.die();
+                    if(myCharacter.lives==0){
+                        end_game_state=true;
+                    }
                 }
             }
         }
@@ -168,6 +186,9 @@ function updateGameArea() {
         //myNewEnemy.update();
         myCharacter.update();
         myScore.update();
+
+    }
+    if (end_game_state) {
 
     }
 }

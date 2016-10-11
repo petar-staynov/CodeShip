@@ -45,9 +45,12 @@ function Bullets(width, height, x, y, direction) {
                 break;
         }
     };
-    this.checkColison = function (obj) {
-        if (this.x + this.width >= obj.x && this.x <= obj.x + obj.width && this.y <= obj.y + obj.height && this.y+obj.height >= obj.y)
+    this.checkCollision = function (obj) {
+        if (this.x + this.width >= obj.x && this.x <= obj.x + obj.width && this.y <= obj.y + obj.height && this.y + obj.height >= obj.y)
             return true;
         else return false;
     };
+    this.checkOutWindowRange = function () {
+        return (this.y < -30 || this.y > 660) ;
+    }
 }
