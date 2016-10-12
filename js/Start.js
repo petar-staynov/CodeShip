@@ -53,7 +53,7 @@ function startGame() {
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu&&!end_game_state) {
-            while (enemies.length < 5 + myScore.currScore / 2000){ //Dynamic difficulty based on score
+            while (enemies.length < 5 + myScore.currScore / 1000){ //Dynamic difficulty based on score
                 //x, y, width, height, sinRange, sinAngleSpeed, sinSpeed
                 enemies.push(new Enemy(Math.random()
                     * (myGameArea.canvas.width - 100),
