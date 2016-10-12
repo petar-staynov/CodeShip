@@ -7,7 +7,7 @@ Simple 2D space shooter game
   
 **TEAM**  
 Petar Staynov - petar-staynov  
-Hristo Bogoes - hristo2612  
+Hristo Bogoev - hristo2612  
 Dancho Ivanov - dantcho  
   
 **Contributions:**  
