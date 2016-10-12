@@ -51,7 +51,7 @@ function startGame() {
     }, 300);
 
     var enemy_interval = setInterval(function () {
-        if (closedStartMenu) {
+        if (closedStartMenu&&!end_game_state) {
             while (enemies.length < 5 + myScore.currScore / 2000){ //Dynamic difficulty based on score
                 //x, y, width, height, sinRange, sinAngleSpeed, sinSpeed
                 enemies.push(new Enemy(Math.random()
@@ -151,7 +151,7 @@ function updateGameArea() {
         myGameArea.context.globalAlpha = 1;
 
     }
-    if (closedStartMenu) {
+    if (closedStartMenu&&!end_game_state) {
         if (bullets.length > 0) {
             for (let i = 0; i < bullets.length; i++) {
                 bullets[i].moveBullet();
@@ -203,7 +203,8 @@ function updateGameArea() {
         if(myLives.currLives==0){
             end_game_state=true;
         }
-        myDeathScreen.onPressEnter();
-        myDeathScreen.update();
+
     }
+    myDeathScreen.onPressEnter();
+    myDeathScreen.update();
 }

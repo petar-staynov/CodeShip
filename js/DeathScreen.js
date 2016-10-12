@@ -42,11 +42,15 @@ function DeathScreen(width, height, x, y) {
             end_game_state = false;
             myCharacter.x = 200;
             myCharacter.y = 580;
-            myCharacter.dxSpeed = myCharacter.deathImg.width/5;
             myCharacter.dx = 0;
             myCharacter.dy = 0;
             myLives.currLives = 5;
             this.pressEnterOnce = false;
+            myScore.currScore=0;
+            bullets = [];
+            enemyBullets = [];
+            enemies.forEach(x=>{x.stopAutomaticShoting()})
+            enemies=[];
         }
     }
 }
