@@ -40,6 +40,11 @@ function DeathScreen(width, height, x, y) {
         }
         if (this.pressEnterOnce){
             end_game_state = false;
+            myCharacter.x = 200;
+            myCharacter.y = 580;
+            myCharacter.dxSpeed = myCharacter.deathImg.width/5;
+            myCharacter.dx = 0;
+            myCharacter.dy = 0;
             myLives.currLives = 5;
             this.pressEnterOnce = false;
         }
