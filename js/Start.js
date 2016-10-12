@@ -8,6 +8,7 @@ var myNewEnemy;
 var myScore;
 var myLives;
 var myDeathScreen;
+var myNewExplosion;
 
 var currAlphaStart = 1;
 
@@ -29,6 +30,7 @@ var playerHit = new Audio("res/playerHit.opus"); //Player hit sound
 var playerDeath = new Audio("res/playerDeath.opus"); //Player death sound
 
 var enemies = [];
+var explosions = [];
 
 function startGame() {
     myGameArea.start();
@@ -165,6 +167,8 @@ function updateGameArea() {
                     if (bullets[i].checkCollision(enemies[j])) {
                         bullets.splice(i, 1);//Removes bullet when it hits
                         enemies[j].stopAutomaticShoting();
+                        myNewExplosion = new Explosion(48,48,enemies[j].x, enemies[j].y);
+                        explosions.push(myNewExplosion);
                         enemies.splice(j, 1); //Removes enemy when bullet hits it
                         myScore.addScore();
                         kill.play();
@@ -208,7 +212,12 @@ function updateGameArea() {
         }
 
     }
+    if (explosions.length > 0){
+        for (let x = 0; x < explosions.length; x++){
+            explosions[x].update();
+        }
+    }
+    myCharacter.update();
     myDeathScreen.onPressEnter();
     myDeathScreen.update();
-    myCharacter.update();
 }
