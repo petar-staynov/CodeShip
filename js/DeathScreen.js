@@ -51,7 +51,7 @@ function DeathScreen(width, height, x, y, font) {
             myScore.currScore=0;
             bullets = [];
             enemyBullets = [];
-            enemies.forEach(x=>{x.stopAutomaticShoting()})
+            enemies.forEach(x=>{x.stopAutomaticShoting()});
             enemies=[];
         }
     }

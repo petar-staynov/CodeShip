@@ -25,7 +25,8 @@ var soundBackground2 = new Audio("res/BackgroundLong.opus"); //Main game backgro
 var bullet = new Audio("res/bullet.opus"); //Bullet shoot sound
 var spawn = new Audio("res/spawn.opus"); //Enemy spawn sound
 var kill = new Audio("res/kill.opus"); //Enemy kill sound
-
+var playerHit = new Audio("res/playerHit.opus"); //Player hit sound
+var playerDeath = new Audio("res/playerDeath.opus"); //Player death sound
 
 var enemies = [];
 
@@ -183,6 +184,7 @@ function updateGameArea() {
                 if (enemyBullets[i].checkCollision(myCharacter)) {
                     myCharacter.hit();
                     enemyBullets.splice(i, 1);
+                    playerHit.play();
                     break;
                 }
             }
@@ -202,9 +204,11 @@ function updateGameArea() {
 
         if(myLives.currLives==0){
             end_game_state=true;
+            playerDeath.play();
         }
 
     }
     myDeathScreen.onPressEnter();
     myDeathScreen.update();
+    myCharacter.update();
 }
