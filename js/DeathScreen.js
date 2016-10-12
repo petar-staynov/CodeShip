@@ -19,7 +19,9 @@ function DeathScreen(width, height, x, y, font) {
             this.fadeOut();
         }
         ctx.drawImage(this.img, this.x,this.y, this.width, this.height);
-        ctx.fillText("Your Score: " + myScore.currScore , this.x, this.y);
+        ctx.font = font;
+        ctx.fillStyle = '#0080ff';
+        ctx.fillText("Your Score: " + myScore.currScore , this.x, this.y + 25);
         myGameArea.context.globalAlpha = 1;
     };
     this.fadeIn = function () {
