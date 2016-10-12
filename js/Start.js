@@ -47,17 +47,24 @@ function startGame() {
             //AUDIO
             bullet.play();
         }
-    }, 369);
+    }, 300);
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu) {
-            for (let i = 0; i <= myScore.currScore / 2000; i++) {
-                enemies.push(new Enemy(Math.random() * (myGameArea.canvas.width - 50), -50, 50, 50, Math.random() * 100 + 20, Math.random() / 10+0.05, Math.random() * 5));
+            while (enemies.length < 5 + myScore.currScore / 2000){ //Dynamic difficulty based on score
+                //x, y, width, height, sinRange, sinAngleSpeed, sinSpeed
+                enemies.push(new Enemy(Math.random()
+                    * (myGameArea.canvas.width - 100),
+                    -50, 50, 50,
+                    Math.random() * 10 + 5, //sinRange
+                    Math.random() / 10 + 0.05, //sinAngleSpeed
+                    Math.random() * 1.5 + 1)); //sinSpeed - enemy down speed
+
                 //AUDIO
                 spawn.play();
             }
         }
-    }, 2200);
+    }, 2000);
 
 }
 
@@ -106,19 +113,19 @@ function updateGameArea() {
         myCharacter.speedY = 0;
 
 
-        if (myGameArea.keys && myGameArea.keys[37]) {
-            myCharacter.speedX = -4;
+        if (myGameArea.keys && myGameArea.keys[37]) {  //left
+            myCharacter.speedX = -7;
         }
-        if (myGameArea.keys && myGameArea.keys[39]) {
-            myCharacter.speedX = 4;
+        if (myGameArea.keys && myGameArea.keys[39]) { //right
+            myCharacter.speedX = 7;
         }
-        if (myGameArea.keys && myGameArea.keys[38]) {
+        if (myGameArea.keys && myGameArea.keys[38]) { //up
             myCharacter.speedY = -4;
         }
-        if (myGameArea.keys && myGameArea.keys[40]) {
-            myCharacter.speedY = 4;
+        if (myGameArea.keys && myGameArea.keys[40]) { //down
+            myCharacter.speedY = 6;
         }
-        if (myGameArea.keys && myGameArea.keys[32] && pressedOnce) {
+        if (myGameArea.keys && myGameArea.keys[32] || myGameArea.keys[17] && pressedOnce) {
             fire_bullet = true;
             pressedOnce = false;
         }

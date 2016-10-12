@@ -10,9 +10,9 @@ var Enemy = (function () {
         this.img = new Image();
         this.img.src = 'res/enemy.png';
         this.lives = 10;
-        this.randomShotTime = Math.random() * 3000 + 100; //from 100 to 3500 ms
+        this.randomShotTime = Math.random() * 3000 + 500; //from 1000 to 3500 ms
         this.shot = function () {
-            console.log(this.x + ' ' + _thisEnemy.x);
+            // console.log(this.x + ' ' + _thisEnemy.x);
             enemyBullets.push(new Bullets(10, 20, _thisEnemy.x + _thisEnemy.width / 2 - 5, _thisEnemy.y + _thisEnemy.height + 2, 2));
         };
         this.automaticShoting = setInterval(this.shot, this.randomShotTime);
