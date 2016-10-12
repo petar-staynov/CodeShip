@@ -7,7 +7,7 @@ var end_game_state = false;
 var myNewEnemy;
 var myScore;
 var myLives;
-
+var myDeathScreen;
 
 var currAlphaStart = 1;
 
@@ -36,6 +36,7 @@ function startGame() {
     myStartScreen = new StartScreen(200, 100, 140, 300);
     myScore = new Score(10, 20, "20px Myriad");
     myLives = new Life(400, 20, "20px Myriad");
+    myDeathScreen = new DeathScreen(200,125, 120, 300);
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet) {
@@ -183,9 +184,6 @@ function updateGameArea() {
                     myCharacter.hit();
                     enemyBullets.splice(i, 1);
                     break;
-                    if(myCharacter.lives==0){
-                        end_game_state=true;
-                    }
                 }
             }
         }
@@ -202,8 +200,10 @@ function updateGameArea() {
         myScore.update();
         myLives.update();
 
-    }
-    if (end_game_state) {
-
+        if(myLives.currLives==0){
+            end_game_state=true;
+        }
+        myDeathScreen.onPressEnter();
+        myDeathScreen.update();
     }
 }
