@@ -36,7 +36,7 @@ function startGame() {
     myStartScreen = new StartScreen(200, 100, 140, 300);
     myScore = new Score(10, 20, "20px Myriad");
     myLives = new Life(400, 20, "20px Myriad");
-    myDeathScreen = new DeathScreen(200, 100, 140, 300);
+    myDeathScreen = new DeathScreen(200, 100, 140, 300, "20px Myriad");
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet) {

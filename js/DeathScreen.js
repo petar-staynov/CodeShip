@@ -1,4 +1,4 @@
-function DeathScreen(width, height, x, y) {
+function DeathScreen(width, height, x, y, font) {
     this.width = width;
     this.height = height;
     this.x = x;
@@ -19,6 +19,7 @@ function DeathScreen(width, height, x, y) {
             this.fadeOut();
         }
         ctx.drawImage(this.img, this.x,this.y, this.width, this.height);
+        ctx.fillText("Your Score: " + myScore.currScore , this.x, this.y);
         myGameArea.context.globalAlpha = 1;
     };
     this.fadeIn = function () {
@@ -42,6 +43,7 @@ function DeathScreen(width, height, x, y) {
             end_game_state = false;
             myCharacter.x = 200;
             myCharacter.y = 580;
+            myCharacter.dxSpeed = myCharacter.deathImg.width/5;
             myCharacter.dx = 0;
             myCharacter.dy = 0;
             myLives.currLives = 5;
