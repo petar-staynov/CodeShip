@@ -7,7 +7,7 @@ var end_game_state = false;
 var myNewEnemy;
 var myScore;
 var myLives;
-var myDeathScreen;
+
 
 var currAlphaStart = 1;
 
@@ -36,7 +36,6 @@ function startGame() {
     myStartScreen = new StartScreen(200, 100, 140, 300);
     myScore = new Score(10, 20, "20px Myriad");
     myLives = new Life(400, 20, "20px Myriad");
-    myDeathScreen = new DeathScreen(200,126,140,300);
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet) {
@@ -48,19 +47,24 @@ function startGame() {
             //AUDIO
             bullet.play();
         }
-    }, 369);
+    }, 300);
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu) {
-            if (enemies.length < 5){
-                for (let i = 0; i <= myScore.currScore / 2000; i++) {
-                    enemies.push(new Enemy(Math.random() * (myGameArea.canvas.width - 50), -50, 50, 50, Math.random() * 100 + 20, Math.random() / 10+0.05, Math.random() * 5));
-                    //AUDIO
-                    spawn.play();
-                }
+            while (enemies.length < 5 + myScore.currScore / 2000){ //Dynamic difficulty based on score
+                //x, y, width, height, sinRange, sinAngleSpeed, sinSpeed
+                enemies.push(new Enemy(Math.random()
+                    * (myGameArea.canvas.width - 100),
+                    -50, 50, 50,
+                    Math.random() * 10 + 5, //sinRange
+                    Math.random() / 10 + 0.05, //sinAngleSpeed
+                    Math.random() * 1.5 + 1)); //sinSpeed - enemy down speed
+
+                //AUDIO
+                spawn.play();
             }
         }
-    }, 2200);
+    }, 2000);
 
 }
 
@@ -109,19 +113,19 @@ function updateGameArea() {
         myCharacter.speedY = 0;
 
 
-        if (myGameArea.keys && myGameArea.keys[37]) {
-            myCharacter.speedX = -4;
+        if (myGameArea.keys && myGameArea.keys[37]) {  //left
+            myCharacter.speedX = -7;
         }
-        if (myGameArea.keys && myGameArea.keys[39]) {
-            myCharacter.speedX = 4;
+        if (myGameArea.keys && myGameArea.keys[39]) { //right
+            myCharacter.speedX = 7;
         }
-        if (myGameArea.keys && myGameArea.keys[38]) {
+        if (myGameArea.keys && myGameArea.keys[38]) { //up
             myCharacter.speedY = -4;
         }
-        if (myGameArea.keys && myGameArea.keys[40]) {
-            myCharacter.speedY = 4;
+        if (myGameArea.keys && myGameArea.keys[40]) { //down
+            myCharacter.speedY = 6;
         }
-        if (myGameArea.keys && myGameArea.keys[32] && pressedOnce) {
+        if (myGameArea.keys && myGameArea.keys[32] || myGameArea.keys[17] && pressedOnce) {
             fire_bullet = true;
             pressedOnce = false;
         }
@@ -130,15 +134,22 @@ function updateGameArea() {
     }
     myBackground.scroll();
     myBackground.update();
-
-
-
     if (!closedStartMenu) {
         myStartScreen.onPressEnter();
+        if (pressEnterOnce){
+            if (currAlphaStart <= 0.04){
+                closedStartMenu = true;
+                pressEnterOnce = false;
+            }else{
+                myGameArea.context.globalAlpha -= 0.02;
+                currAlphaStart -= 0.02;
+            }
+            myGameArea.context.globalAlpha = currAlphaStart;
+        }
         myStartScreen.update();
+        myGameArea.context.globalAlpha = 1;
+
     }
-
-
     if (closedStartMenu) {
         if (bullets.length > 0) {
             for (let i = 0; i < bullets.length; i++) {
@@ -172,6 +183,9 @@ function updateGameArea() {
                     myCharacter.hit();
                     enemyBullets.splice(i, 1);
                     break;
+                    if(myCharacter.lives==0){
+                        end_game_state=true;
+                    }
                 }
             }
         }
@@ -188,10 +202,8 @@ function updateGameArea() {
         myScore.update();
         myLives.update();
 
-        if(myLives.currLives==0) {
-            end_game_state = true;
-        }
-        myDeathScreen.onPressEnter();
-        myDeathScreen.update();
+    }
+    if (end_game_state) {
+
     }
 }

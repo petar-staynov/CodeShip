@@ -35,9 +35,7 @@ function Player(width, height, x, y) {
         }
     };
     this.hit = function () {
-        if (!end_game_state){
-            myLives.currLives--;
-        }
+        myLives.currLives--;
         // myScore.currScore -= 33;
     }
 }
