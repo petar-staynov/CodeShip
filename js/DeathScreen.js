@@ -4,7 +4,7 @@ function DeathScreen(width, height, x, y) {
     this.x = x;
     this.y = y;
     this.img = new Image();
-    this.img.src = 'res/gameOver.jpg';
+    this.img.src = 'res/gameOver.png';
 
     this.pressEnterOnce = false;
     this.alpha = 0;
