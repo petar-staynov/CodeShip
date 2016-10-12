@@ -20,7 +20,7 @@ function DeathScreen(width, height, x, y, font) {
         }
         ctx.drawImage(this.img, this.x,this.y, this.width, this.height);
         ctx.font = font;
-        ctx.fillStyle = '#0080ff';
+        ctx.fillStyle = '#333333';
         ctx.fillText("Your Score: " + myScore.currScore , this.x, this.y + 25);
         myGameArea.context.globalAlpha = 1;
     };

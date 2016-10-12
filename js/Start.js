@@ -35,9 +35,9 @@ function startGame() {
     myBackground = new Background(480, 640, 0, 0);
     myCharacter = new Player(48, 48, 200, 580);
     myStartScreen = new StartScreen(200, 100, 140, 300);
-    myScore = new Score(20, 30, "30px Myriad");
-    myLives = new Life(369, 30, "30px Myriad");
-    myDeathScreen = new DeathScreen(200, 100, 140, 300, "30px Myriad");
+    myScore = new Score(20, 30, "20px Myriad");
+    myLives = new Life(369, 30, "20px Myriad");
+    myDeathScreen = new DeathScreen(200, 100, 140, 300, "25px Myriad");
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet) {
