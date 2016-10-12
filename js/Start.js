@@ -36,7 +36,7 @@ function startGame() {
     myStartScreen = new StartScreen(200, 100, 140, 300);
     myScore = new Score(10, 20, "20px Myriad");
     myLives = new Life(400, 20, "20px Myriad");
-    myDeathScreen = new DeathScreen(230,125, 110, 300);
+    myDeathScreen = new DeathScreen(200, 100, 140, 300);
 
     var bullet_interval = setInterval(function () {
         if (fire_bullet) {
@@ -48,7 +48,7 @@ function startGame() {
             //AUDIO
             bullet.play();
         }
-    }, 300);
+    }, 450);
 
     var enemy_interval = setInterval(function () {
         if (closedStartMenu&&!end_game_state) {
