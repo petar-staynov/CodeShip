@@ -12,17 +12,7 @@ Dancho Ivanov - dantcho
   
 **Contributions:**  
 hristo2612:  
-Player movement  
-Enemy movement  
-Player Bullet system  
- 
-petar-staynov:
-General design  
-Audio and visuals  
-Fixes and tweaks  
-  
+petar-staynov:  
 dantcho  
-Enemy Bullet system
-Fixes and tweaks  
-
+  
 **no license**  
