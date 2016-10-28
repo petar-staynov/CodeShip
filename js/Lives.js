@@ -3,7 +3,7 @@ function Life(x, y, font) {
     this.y = y;
     this.currLives = 5;
     this.update = function() {
-        var ctx = myGameArea.context;
+        let ctx = myGameArea.context;
         ctx.font = font;
         ctx.fillText("Lives: " + this.currLives, this.x, this.y);
     };

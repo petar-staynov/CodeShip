@@ -25,7 +25,7 @@ function Bullets(width, height, x, y, direction) {
 
 
     this.update = function () {
-        var ctx = myGameArea.context;
+        let ctx = myGameArea.context;
         ctx.drawImage(this.img, this.imgX, this.imgY, 19, 64, this.x, this.y, this.width, this.height);
     };
 

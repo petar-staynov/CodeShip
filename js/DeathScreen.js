@@ -8,7 +8,7 @@ function DeathScreen(width, height, x, y, font) {
 
     this.pressEnterOnce = false;
     this.alpha = 0;
-    var ctx = myGameArea.context;
+    let ctx = myGameArea.context;
     ctx.globalAlpha = 0;
 
     this.update = function() {

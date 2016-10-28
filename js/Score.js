@@ -3,7 +3,7 @@ function Score(x, y, font) {
     this.y = y;
     this.currScore = 0;
     this.update = function() {
-        var ctx = myGameArea.context;
+        let ctx = myGameArea.context;
         ctx.font = font;
         ctx.fillText("Score: " + this.currScore, this.x, this.y);
     };

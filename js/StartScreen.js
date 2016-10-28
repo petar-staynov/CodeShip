@@ -6,8 +6,8 @@ function StartScreen(width, height, x, y) {
     this.img = new Image();
     this.img.src = 'res/StartButton.png';
 
-    var alpha = 1;
-    var ctx = myGameArea.context;
+    let alpha = 1;
+    let ctx = myGameArea.context;
     ctx.globalAlpha = 1;
 
     this.update = function() {

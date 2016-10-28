@@ -16,7 +16,7 @@ function Player(width, height, x, y) {
     this.dySpeed = this.deathImg.height/5;
 
     this.update = function () {
-        var ctx = myGameArea.context;
+        let ctx = myGameArea.context;
         if (!end_game_state){
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }

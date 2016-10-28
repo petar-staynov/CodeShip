@@ -1,36 +1,36 @@
-var myCharacter;
-var myBackground;
-var myNewBullet;
-var myStartScreen;
-var pause_game_state;
-var end_game_state = false;
-var myNewEnemy;
-var myScore;
-var myLives;
-var myDeathScreen;
-var myNewExplosion;
+let myCharacter;
+let myBackground;
+let myNewBullet;
+let myStartScreen;
+let pause_game_state;
+let end_game_state = false;
+let myNewEnemy;
+let myScore;
+let myLives;
+let myDeathScreen;
+let myNewExplosion;
 
-var currAlphaStart = 1;
+let currAlphaStart = 1;
 
-var bullets = [];
-var enemyBullets = [];
-var fire_bullet = false;
-var pressedOnce = true;
+let bullets = [];
+let enemyBullets = [];
+let fire_bullet = false;
+let pressedOnce = true;
 
-var pressEnterOnce = false;
-var closedStartMenu = false;
+let pressEnterOnce = false;
+let closedStartMenu = false;
 
 //AUDIO LOADER
-var soundBackground1 = new Audio("res/BackgroundShort.opus"); //Main menu background
-var soundBackground2 = new Audio("res/BackgroundLong.opus"); //Main game background
-var bullet = new Audio("res/bullet.opus"); //Bullet shoot sound
-var spawn = new Audio("res/spawn.opus"); //Enemy spawn sound
-var kill = new Audio("res/kill.opus"); //Enemy kill sound
-var playerHit = new Audio("res/playerHit.opus"); //Player hit sound
-var playerDeath = new Audio("res/playerDeath.opus"); //Player death sound
+let soundBackground1 = new Audio("res/BackgroundShort.opus"); //Main menu background
+let soundBackground2 = new Audio("res/BackgroundLong.opus"); //Main game background
+let bullet = new Audio("res/bullet.opus"); //Bullet shoot sound
+let spawn = new Audio("res/spawn.opus"); //Enemy spawn sound
+let kill = new Audio("res/kill.opus"); //Enemy kill sound
+let playerHit = new Audio("res/playerHit.opus"); //Player hit sound
+let playerDeath = new Audio("res/playerDeath.opus"); //Player death sound
 
-var enemies = [];
-var explosions = [];
+let enemies = [];
+let explosions = [];
 
 function startGame() {
     myGameArea.start();
@@ -41,7 +41,7 @@ function startGame() {
     myLives = new Life(369, 30, "20px Myriad");
     myDeathScreen = new DeathScreen(200, 100, 140, 300, "25px Myriad");
 
-    var bullet_interval = setInterval(function () {
+    let bullet_interval = setInterval(function () {
         if (fire_bullet) {
             myNewBullet = new Bullets(10, 20, myCharacter.x + myCharacter.width / 2 - 5, myCharacter.y, 0);
             bullets.push(myNewBullet);
@@ -53,7 +53,7 @@ function startGame() {
         }
     }, 450);
 
-    var enemy_interval = setInterval(function () {
+    let enemy_interval = setInterval(function () {
         if (closedStartMenu&&!end_game_state) {
             while (enemies.length < 5 + myScore.currScore / 1000){ //Dynamic difficulty based on score
                 //x, y, width, height, sinRange, sinAngleSpeed, sinSpeed
@@ -72,7 +72,7 @@ function startGame() {
 
 }
 
-var myGameArea = {
+let myGameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
         this.canvas.width = 480;
@@ -194,7 +194,7 @@ function updateGameArea() {
             }
         }
         if (enemies.length > 0) {
-            for (var k = 0; k < enemies.length; k++) {
+            for (let k = 0; k < enemies.length; k++) {
                 enemies[k].moveDownSin();
                 enemies[k].update();
             }

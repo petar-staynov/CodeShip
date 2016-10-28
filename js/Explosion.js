@@ -12,7 +12,7 @@ function Explosion(width, height, x, y) {
     this.dySpeed = this.deathImg.height/5;
 
     this.update = function () {
-        var ctx = myGameArea.context;
+        let ctx = myGameArea.context;
         ctx.drawImage(this.deathImg, this.dx , this.dy, this.deathImg.width/5, this.deathImg.height/5, this.x, this.y, this.width, this.height);
         this.animate();
     };
